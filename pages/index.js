@@ -52,7 +52,7 @@ function Index(){
     const login = async () => {
         console.log(form)
     try {
-        const res = await fetch("http://localhost:3000/api/usuarios",{
+        const res = await fetch("/api/usuarios",{
             method: "PUT",
             headers: {
                 "Accept": "application/json",

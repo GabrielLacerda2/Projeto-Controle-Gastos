@@ -73,7 +73,7 @@ function extratoReceita({user}){
 extratoReceita.getInitialProps = async (ctx) => {
     const {query} = ctx;
     
-        const res = await fetch(`http://localhost:3000/api/${query.id}`,{
+        const res = await fetch(`/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",

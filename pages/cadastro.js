@@ -65,7 +65,7 @@ function Cadastro(){
     const createUsuario = async () => {
         
         try {
-            const res = await fetch("http://localhost:3000/api/usuarios/buscaUsuarios",{
+            const res = await fetch("/api/usuarios/buscaUsuarios",{
                 method: 'POST',
                 headers: {
                     "Accept": "application/json",
@@ -78,7 +78,7 @@ function Cadastro(){
         const {data} = await res.json();   
         if(data === null){
             try {
-                const res = fetch("http://localhost:3000/api/usuarios",{
+                const res = fetch("/api/usuarios",{
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
