@@ -1,0 +1,38 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-projetogastonext-dev-114244-authRole",
+      "UnauthRoleArn": "arn:aws:iam::913304760892:role/amplify-projetogastonext-dev-114244-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::913304760892:role/amplify-projetogastonext-dev-114244-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-projetogastonext-dev-114244-deployment",
+      "UnauthRoleName": "amplify-projetogastonext-dev-114244-unauthRole",
+      "StackName": "amplify-projetogastonext-dev-114244",
+      "StackId": "arn:aws:cloudformation:us-east-1:913304760892:stack/amplify-projetogastonext-dev-114244/6a9bcfb0-67c0-11eb-bc78-0a042094dbc5",
+      "AmplifyAppId": "d17o4xu1trzzxo"
+    }
+  },
+  "auth": {
+    "projetogastonextd9ba9d83": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-projetogastonext-dev-114244-deployment/amplify-cfn-templates/auth/projetogastonextd9ba9d83-cloudformation-template.yml",
+        "logicalId": "authprojetogastonextd9ba9d83"
+      },
+      "lastPushTimeStamp": "2021-02-05T15:29:49.569Z",
+      "output": {
+        "AppClientSecret": "sllp4jlms077e14rfj2i5rsfno77nfov78r5vu77katjbvrrd9d",
+        "UserPoolId": "us-east-1_8BRVh9igb",
+        "AppClientIDWeb": "8tvluu3pn49p1cfd46jfk16fm",
+        "AppClientID": "4juu4seejhanvabf1gfumec0fb",
+        "IdentityPoolId": "us-east-1:a7a8611b-62d4-4200-96a6-e3700693ffbe",
+        "IdentityPoolName": "projetogastonextd9ba9d83_identitypool_d9ba9d83__dev",
+        "UserPoolName": "projetogastonextd9ba9d83_userpool_d9ba9d83"
+      },
+      "lastPushDirHash": "XgqfrDW+xBFe5spiwVqYSM4bBrQ="
+    }
+  }
+}
