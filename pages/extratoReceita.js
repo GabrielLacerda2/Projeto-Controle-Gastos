@@ -29,6 +29,8 @@ function extratoReceita({user}){
         { key: 'p', text: 'Pensão', value: 'pensao' },
         { key: 'e', text: 'Empréstimo', value: 'emprestimo' },
         { key: 's', text: 'Salário', value: 'salario' },
+        { key: 'pa', text: 'Pagamento', value: 'pagamento' },
+        { key: 'd', text: 'Diversos', value: 'diversos' },
     ]
 
     const handleSelect = (e) => {

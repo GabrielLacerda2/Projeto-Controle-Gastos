@@ -65,11 +65,13 @@ function Lançamento(props){
                     <option>Pensão</option>
                     <option>Empréstimo</option>
                     <option>Pagamento</option>
+                    <option>Diversos</option>
                 </select>
                 <label>Descrição</label>
                 <input type="text" placeholder="Adicione a descrição do lançamento" className="input-text-receita" onChange={handleDesc}></input>
                 <label>Data</label>
                 <input type="date" className="date" onChange={handleData}/>
+                
                 <label>Repetir lançamento</label>
                 <select onChange={handleRepetir}>
                     <option>Não repetir</option>
