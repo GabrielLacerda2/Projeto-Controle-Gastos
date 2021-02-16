@@ -40,7 +40,7 @@ function Lançamento(props){
 
     const createLancamento = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/lancamentos',{
+            const res = await fetch('/api/lancamentos',{
                 method: 'POST',
                 headers: {
                     "Accept": "application/json",
