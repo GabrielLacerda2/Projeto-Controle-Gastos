@@ -6,7 +6,7 @@ function Receita(props){
     console.log(props.query.id)
     return(
         <div>
-        <Header />
+        <Header user="Adicionando uma receita" />
         <Lançamento type="receita" id={props.query.id}  />
         </div>
     )

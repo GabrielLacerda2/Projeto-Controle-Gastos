@@ -30,7 +30,7 @@ function Resume(props){
                     
 
                 </div> 
-                <div className="resume">
+                <div className="resume-midle">
                     <div className="title-add">
                     <Link href={{
                             pathname: '/extratoReceita',

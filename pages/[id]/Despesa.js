@@ -6,7 +6,7 @@ function Despesa(props){
     console.log(props.query.id)
     return(
         <div>
-        <Header />
+        <Header user="Adicionando uma despesa"  />
         <Lançamento type="despesa" id={props.query.id}  />
         </div>
     )

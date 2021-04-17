@@ -4,20 +4,52 @@ import saldo from '../../controllers/saldo';
 import receita from '../../controllers/receita';
 import despesa from '../../controllers/despesa';
 
+
+export async function getServerSideProps(ctx) {
+    const { req, query, res, asPath, pathname } = ctx;
+    let host;
+
+    if(req){
+        host = req.headers.host
+    }
+
+    console.log(query)
+    console.log(process.cwd())
+    console.log(__dirname)
+    const url = process.env.AUTHO_POST_ENDPOINT;
+    console.log(url)
+        const ref = await fetch(`http://${host}/api/${query.id}`,{
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+    })
+  
+      const {data} = await ref.json();
+      
+      return {
+          props:{
+          user:data
+          }
+    };
+  }
+
 function Home({user}){
     console.log(user)
     return(
         <div>
-        <Header />
+        <Header user={"Olá, "+user[1].name} />
         <Resume saldo={saldo(user[0])} receita={receita(user[0])} despesa={despesa(user[0])} lancamentos={user[0]} usuario={user[1]} />
         </div>
     )
 }
-
+/*
 Home.getInitialProps = async (ctx) => {
     const {query} = ctx;
-    
-        const res = await fetch(`/api/${query.id}`,{
+    console.log(query)
+    console.log(process.cwd())
+        const res = await fetch(`http://localhost:3000/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -29,6 +61,6 @@ Home.getInitialProps = async (ctx) => {
       
       return {user:data};
   
-  }
+  }*/
 
 export default Home;

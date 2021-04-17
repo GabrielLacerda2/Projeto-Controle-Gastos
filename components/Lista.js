@@ -14,9 +14,13 @@ function Lista(props){
     return(
         <ul>
             {render.map((item,key)=> (
-                <li key={key}>{item[0].valor}</li>
+                <li key={key} className="list-actions">
+                    {item[0].valor} 
+                    {item[0].descricao}
+                    {item[0].data}
+                </li>
             ))}
-            </ul>
+        </ul>
     );
 }
 
