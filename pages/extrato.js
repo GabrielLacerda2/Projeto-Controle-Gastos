@@ -19,7 +19,7 @@ import {
         host = req.headers.host;
     }
     console.log(query.type)
-        const res = await fetch(`https://${host}/api/${query.id}`,{
+        const res = await fetch(`http://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -71,7 +71,7 @@ function extratoReceita(props){
     const selected = () => {
         
         props.user[0].forEach((item)=>{
-            if(item.tipo == type){
+            if(item.tipo == props.type){
                 console.log("entrou")
                 initialValue.push([item]);
             }
