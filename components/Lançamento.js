@@ -8,7 +8,7 @@ function Lançamento(props){
     const [valor,setValor] = useState(0);
     const [categoria,setCategoria] = useState("Salário");
     const [descricao,setDescricao] = useState("");
-    const [data,setData] = useState();
+    const [data,setData] = useState("");
     const [repetir,setRepetir] = useState("");
     const [a,setA] = useState(0);
     const router = useRouter();
@@ -44,7 +44,7 @@ function Lançamento(props){
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({tipo:props.type,categoria,valor,descricao,data,repetir,usuario:props.id}),
+                body: JSON.stringify({tipo:props.type,categoria:categoria,valor:valor,descricao:descricao,data:data,repetir:repetir,usuario:props.id}),
             })
         router.push({ pathname: '/[id]/home',
                      query: { id: props.id}})

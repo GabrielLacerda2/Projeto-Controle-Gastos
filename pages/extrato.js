@@ -39,7 +39,8 @@ import {
 
 function extratoReceita(props){
   
-    const [categoria,setCategoria] = useState("categoria");
+    const [categoria,setCategoria] = useState("");
+    const [categoria1,setCategoria1] = useState("categoria");
     const [totalstate,setTotalState] = useState();
     const [lista,setLista] = useState([]);
     const initialValue = [];
@@ -62,6 +63,7 @@ function extratoReceita(props){
 
     const handleSelect = (e) => {
         setCategoria(e.target.innerText)
+        setCategoria1(e.target.value)
         console.log(categoria)
         selected();
     }
@@ -93,7 +95,7 @@ function extratoReceita(props){
                 label="Selecione uma categoria:"
                 onChange={handleSelect}
                 options={options}
-                placeholder={categoria}
+                placeholder={categoria1}
                 />
             </Form>
             </div>
