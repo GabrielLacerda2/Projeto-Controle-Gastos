@@ -12,12 +12,7 @@ export async function getServerSideProps(ctx) {
     if(req){
         host = req.headers.host
     }
-
-    console.log(query)
-    console.log(process.cwd())
-    console.log(__dirname)
-    const url = process.env.AUTHO_POST_ENDPOINT;
-    console.log(url)
+    console.log(host)
         const ref = await fetch(`https://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
