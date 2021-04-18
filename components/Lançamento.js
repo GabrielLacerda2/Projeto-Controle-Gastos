@@ -1,11 +1,8 @@
 import React from 'react';
-
 import {useState} from 'react';
-
 import {useRouter} from 'next/router';
-
-
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import CurrencyInput from 'react-currency-masked-input'
 
 function Lançamento(props){
     const [valor,setValor] = useState(0);
@@ -13,13 +10,14 @@ function Lançamento(props){
     const [descricao,setDescricao] = useState("");
     const [data,setData] = useState();
     const [repetir,setRepetir] = useState("");
-
+    const [a,setA] = useState(0);
     const router = useRouter();
     
 
-    const handleValor = (e) => {
-        setValor(e.target.value);
+    const handleValor = (e,props) => {
+        setValor(parseFloat(props))
     }
+
     const handleCategoria = (e) => {
         setCategoria(e.target.value);
     }
@@ -57,7 +55,7 @@ function Lançamento(props){
     return(
         <div className="content-receita">
             <p>Nova {props.type}</p>
-            <input type="text" placeholder="0,00" className="valor-receita" onChange={handleValor}></input>
+            <CurrencyInput className="valor-receita" placeholder="0,0" onChange={handleValor} required />
             <form className="receita-form">
                 <label>Categoria</label>
                 <select onChange={handleCategoria}>

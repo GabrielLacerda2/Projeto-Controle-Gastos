@@ -11,9 +11,9 @@ import {
     TextArea,
   } from 'semantic-ui-react';
 
-function extratoReceita({user}){
+function extratoReceita({user,type}){
   
-    const [categoria,setCategoria] = useState("");
+    const [categoria,setCategoria] = useState("categoria");
     const [totalstate,setTotalState] = useState();
     const [lista,setLista] = useState([]);
     const initialValue = [];
@@ -26,6 +26,7 @@ function extratoReceita({user}){
             
 
     const options = [
+        { key: 't', text: 'Todos', value: 'todos' },
         { key: 'p', text: 'Pensão', value: 'pensao' },
         { key: 'e', text: 'Empréstimo', value: 'emprestimo' },
         { key: 's', text: 'Salário', value: 'salario' },
@@ -44,29 +45,35 @@ function extratoReceita({user}){
     const selected = () => {
         var total = 0;
         user[0].forEach((item)=>{
-            if(item.tipo == "receita"){
+            if(item.tipo == type){
                 console.log("entrou")
                 initialValue.push([item]);
             }
         })
         setLista(initialValue);  
 }   
+    console.log(lista)
+
+    let headerTitle = '';
+    type == "receita"? headerTitle= 'Extrato das Receitas' : headerTitle = 'Extrato das Despesas'
     return(
         <div>
-            <Header />
+            <Header user={headerTitle}  />
             <div className="form-catetegoria">
+            <div className="extrato-receita-form">
             <Form>
                 <Form.Field
                 control={Select}
-                label="Categoria"
+                label="Selecione uma categoria:"
                 onChange={handleSelect}
                 options={options}
-                placeholder="Categoria"
+                placeholder={categoria}
                 />
             </Form>
             </div>
             <Lista option={categoria} lista={lista}/>
             <h1>{totalstate}</h1>
+            </div>
         </div>
     );
 
@@ -74,8 +81,13 @@ function extratoReceita({user}){
 
 extratoReceita.getInitialProps = async (ctx) => {
     const {query} = ctx;
-    
-        const res = await fetch(`/api/${query.id}`,{
+    const {req} = ctx;
+    let host;
+    if(req){
+        host = req.headers.host;
+    }
+    console.log(query.type)
+        const res = await fetch(`http://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -85,7 +97,7 @@ extratoReceita.getInitialProps = async (ctx) => {
   
       const {data} = await res.json();
       
-      return {user:data};
+      return {user:data,type:query.type};
 }
 
 export default extratoReceita;

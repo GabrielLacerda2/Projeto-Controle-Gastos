@@ -25,7 +25,7 @@ function Resume(props){
                      
                     <div className="valor">
                         <p>R$</p>
-                        <p className="saldo">{props.saldo}</p>
+                        <p className="saldo">{parseFloat(props.saldo).toFixed(2)}</p>
                     </div>
                     
 
@@ -33,8 +33,8 @@ function Resume(props){
                 <div className="resume-midle">
                     <div className="title-add">
                     <Link href={{
-                            pathname: '/extratoReceita',
-                            query: { id: props.usuario._id},
+                            pathname: '/extrato',
+                            query: { id: props.usuario._id, type: "receita"},
                         }}><h1>Receitas</h1></Link>
                         <Link href={{
                             pathname: '/[id]/Receita',
@@ -48,13 +48,18 @@ function Resume(props){
 
                     <div className="valor">
                         <p style={receitaStyle}>R$</p>
-                        <p className="saldo" style={receitaStyle}>{props.receita}</p>
+                        <p className="saldo" style={receitaStyle}>{parseFloat(props.receita).toFixed(2)}</p>
                     </div>
                 </div>
                 
                 <div className="resume">
                     <div className="title-add">
+                    <Link href={{
+                            pathname: '/extrato',
+                            query: { id: props.usuario._id,type:"despesa"},
+                        }}>
                     <h1>Despesas</h1>
+                    </Link>
                     <Link href={{
                             pathname: '/[id]/Despesa',
                             query: { id: props.usuario._id},
@@ -66,7 +71,7 @@ function Resume(props){
                     </div>
                     <div className="valor">
                         <p style={despesaStyle}>R$</p>
-                        <p className="saldo" style={despesaStyle}>{props.despesa}</p>
+                        <p className="saldo" style={despesaStyle}>{parseFloat(props.despesa).toFixed(2)}</p>
                     </div>
                 </div>    
                

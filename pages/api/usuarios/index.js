@@ -9,7 +9,7 @@ export default async (req, res) => {
     switch (method) {
         case 'PUT':
             try {
-                const usuarios = await Usuario.findOne({email: req.body.email}).select('+senha');
+                const usuarios = await Usuario.findOne({email: req.body.email,senha:req.body.senha}).select('+senha');
                 res.status(201).json({sucess:true, data: usuarios})
             } catch (error) {
                 res.status(400).json({sucess:false});

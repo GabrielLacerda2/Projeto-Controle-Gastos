@@ -8,6 +8,7 @@ function Index(){
     const [errors,setErrors] = useState({});
     const [isSubmit,setIsSubmit] = useState(false);
     const [form,setForm] = useState({});
+    const [message,setMessage] = useState('');
     const router = useRouter();
 
     useEffect(() =>{
@@ -36,6 +37,7 @@ function Index(){
         console.log(errs)
         setErrors(errs);
         setIsSubmit(true);
+        setMessage('')
     }
 
     const Validate = () =>{
@@ -51,7 +53,8 @@ function Index(){
 
     const login = async () => {
         console.log(form)
-    try {
+        
+
         const res = await fetch("/api/usuarios",{
             method: "PUT",
             headers: {
@@ -62,23 +65,24 @@ function Index(){
         })
 
         const {data} = await res.json();
-        
+        console.log(data)
+        if(data){
         console.log(data._id);
+        console.log("aaaaaaaaaaaaaaa")
         if(data.email === form.email && data.senha === form.senha){
             console.log("Usuario encontrado");
             router.push({
                 pathname: '/[id]/home',
                 query: { id: data._id},
             })
-                        
-                    
-        }else{
-            console.log("Usuario feio")
+                             
         }
-
-    } catch (error) {
-        console.error(error);
+    }else{
+        console.log("Usuario feio")
+        setMessage("Usuário não encontrado, tente novamente")
+    
     }
+    
     }
   
     return(
@@ -117,11 +121,13 @@ function Index(){
             />
               <Button onClick={handleSubmit} type="submit" fluid color="orange" size="large" className="btn-cad">Acessar</Button>  
         </Form>
-        <div className="space"></div>
-        <h4>Ainda não é um usuario?</h4>
-        <Link href='/cadastro'>
-        <Button type="submit"  color="black" size="small" className="btn-cad">Cadastro</Button>
-        </Link>
+        <span>{message}</span>
+        <div className="signup-option">
+            <h4>Ainda não é um usuario?</h4>
+            <Link href='/cadastro'>
+            <Button type="submit"  color="black" size="small" className="btn-cad">Cadastro</Button>
+            </Link>
+        </div>
         </div>
         </div>
        
