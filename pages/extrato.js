@@ -11,7 +11,33 @@ import {
     TextArea,
   } from 'semantic-ui-react';
 
-function extratoReceita({user,type}){
+  export async function getServerSideProps(ctx) {
+    const {query} = ctx;
+    const {req} = ctx;
+    let host;
+    if(req){
+        host = req.headers.host;
+    }
+    console.log(query.type)
+        const res = await fetch(`https://${host}/api/${query.id}`,{
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+    })
+  
+      const {data} = await res.json();
+      
+      return {
+          props:{
+            user:data,
+            type:query.type
+          }
+    };
+  }
+
+function extratoReceita(props){
   
     const [categoria,setCategoria] = useState("categoria");
     const [totalstate,setTotalState] = useState();
@@ -43,8 +69,8 @@ function extratoReceita({user,type}){
    
     
     const selected = () => {
-        var total = 0;
-        user[0].forEach((item)=>{
+        
+        props.user[0].forEach((item)=>{
             if(item.tipo == type){
                 console.log("entrou")
                 initialValue.push([item]);
@@ -55,7 +81,7 @@ function extratoReceita({user,type}){
     console.log(lista)
 
     let headerTitle = '';
-    type == "receita"? headerTitle= 'Extrato das Receitas' : headerTitle = 'Extrato das Despesas'
+    props.type == "receita"? headerTitle= 'Extrato das Receitas' : headerTitle = 'Extrato das Despesas'
     return(
         <div>
             <Header user={headerTitle}  />
@@ -79,6 +105,7 @@ function extratoReceita({user,type}){
 
 }
 
+/*
 extratoReceita.getInitialProps = async (ctx) => {
     const {query} = ctx;
     const {req} = ctx;
@@ -99,5 +126,5 @@ extratoReceita.getInitialProps = async (ctx) => {
       
       return {user:data,type:query.type};
 }
-
+*/
 export default extratoReceita;
