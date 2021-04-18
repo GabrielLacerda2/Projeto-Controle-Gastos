@@ -87,7 +87,7 @@ extratoReceita.getInitialProps = async (ctx) => {
         host = req.headers.host;
     }
     console.log(query.type)
-        const res = await fetch(`http://${host}/api/${query.id}`,{
+        const res = await fetch(`https://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",

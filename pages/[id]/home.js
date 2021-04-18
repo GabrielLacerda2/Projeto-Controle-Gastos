@@ -18,7 +18,7 @@ export async function getServerSideProps(ctx) {
     console.log(__dirname)
     const url = process.env.AUTHO_POST_ENDPOINT;
     console.log(url)
-        const ref = await fetch(`http://${host}/api/${query.id}`,{
+        const ref = await fetch(`https://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",
