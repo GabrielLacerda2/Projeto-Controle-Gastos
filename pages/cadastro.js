@@ -8,6 +8,7 @@ function Cadastro(){
     const [errors,setErrors] = useState({});
     const [isSubmit,setIsSubmit] = useState(false);
     const [form,setForm] = useState({});
+    const [message,setMessage] = useState('');
     const router = useRouter();
 
     useEffect(() =>{
@@ -23,21 +24,16 @@ function Cadastro(){
     },[errors]);
 
     const handleChange = (e) => {
-        console.log(e.target.value);
-        
         setForm({
             ...form,
             [e.target.name]: e.target.value
         })
-
-       
-            
     }
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        setMessage('')
         let errs = Validate();
-        console.log(errs)
         setErrors(errs);
         setIsSubmit(true);
     }
@@ -48,13 +44,16 @@ function Cadastro(){
             errs.name = 'Nome is required';
         }
         if(!form.email){
-            errs.email = 'Cpf is required';
+            errs.email = 'Email is required';
         }
         if(!form.cpf){
             errs.cpf = 'Cpf is required';
         }
         if(!form.senha){
-            errs.senha = 'Cpf is required';
+            errs.senha = 'Senha is required';
+        }
+        if(!form.confirmSenha){
+            errs.senha = 'Confirm Senha is required';
         }
 
         return errs;
@@ -63,43 +62,46 @@ function Cadastro(){
 
     
     const createUsuario = async () => {
-        
-        try {
-            const res = await fetch("/api/usuarios/buscaUsuarios",{
-                method: 'POST',
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(form),
-                
-            })
-
-        const {data} = await res.json();   
-        if(data === null){
+        if(form.senha == form.confirmSenha){
             try {
-                const res = fetch("/api/usuarios",{
-                    method: "POST",
+                const res = await fetch("/api/usuarios/buscaUsuarios",{
+                    method: 'POST',
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(form),
+                    
                 })
-                router.push({ path: '/', params: { message: 'Usuário cadastrado com sucesso!' } })
-                
-                
-            } catch (error) {
-                console.error(error);
+
+            const {data} = await res.json();   
+            if(data === null){
+                try {
+                    const res = fetch("/api/usuarios",{
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(form),
+                    })
+                    router.push('/')
+                    
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            }else{
+                console.log("Usuario ja foi cadastrado")
+                setMessage("Usuário já foi cadastrado")
+            }
+
+            } catch (error) {   
+                console.error(error)
             }
         }else{
-            console.log("Usuario ja foi cadastrado")
+            setMessage("Senhas não conferem")
         }
-
-        } catch (error) {
-            console.log(error,"Usuario n foi encontrado")
-        }
-        
     }
     return(
         <div className="wrapper-index">
@@ -147,14 +149,28 @@ function Cadastro(){
                 ''}:null}
             label="Senha"
             name="senha"
+            type="password"
             placeholder="Senha"
             onChange={handleChange}
-            />
+            /><Form.Input 
+            error={errors.senha ? { content:
+               "Por favor insira uma senha", pointing:
+               ''}:null}
+           label="Confirme sua senha"
+           name="confirmSenha"
+           type="password"
+           placeholder="Senha"
+           onChange={handleChange}
+           />
               <Button onClick={handleSubmit} type="submit" fluid color="orange" size="large" className="btn-cad">Cadastrar</Button>  
-              <Link href="/">
-                <a className="signin-a">Entrar</a>
-            </Link>
+              
         </Form>
+            <span>{message}</span>
+        <div className="link-signin">
+            <Link href="/">
+                    <a className="signin-a">Entrar</a>
+            </Link>
+        </div>
         </div>
         </div>
        

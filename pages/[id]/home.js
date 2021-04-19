@@ -12,8 +12,7 @@ export async function getServerSideProps(ctx) {
     if(req){
         host = req.headers.host
     }
-    console.log(host)
-        const ref = await fetch(`https://${host}/api/${query.id}`,{
+        const ref = await fetch(`http://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -31,7 +30,6 @@ export async function getServerSideProps(ctx) {
   }
 
 function Home({user}){
-    console.log(user)
     return(
         <div>
         <Header user={"Olá, "+user[1].name} />

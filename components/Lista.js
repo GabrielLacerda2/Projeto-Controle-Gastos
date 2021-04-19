@@ -6,16 +6,11 @@ function Lista(props){
     const render = [];
 
     
-    console.log(props.lista,"LISTA")
-    console.log(props.option)
-
     if(props.option == "Todos"){
         props.lista.map(item =>{
-            console.log(item)
             render.push(item)
         })
     }else{
-        console.log("entrou")
         props.lista.map((item)=>{
         if(item[0].categoria === props.option){
             render.push(item);
@@ -25,7 +20,6 @@ function Lista(props){
 
     
     const formatDate = (data) =>{
-        console.log(data)
         const dia = data.substr(8,2)
         const mes = data.substr(5,2)-1
         const ano = data.substr(0,4)
@@ -34,10 +28,6 @@ function Lista(props){
         return dataFormatada
     }
 
-    render.map(item =>{
-        console.log(item[0].data != null,"aaa")
-    })
-   
     return(
         <ul>
             {render.map((item,key)=> (

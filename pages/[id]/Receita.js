@@ -3,7 +3,6 @@ import Lançamento from '../../components/Lançamento';
 
 function Receita(props){
 
-    console.log(props.query.id)
     return(
         <div>
         <Header user="Adicionando uma receita" />

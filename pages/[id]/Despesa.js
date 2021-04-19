@@ -3,7 +3,6 @@ import Lançamento from '../../components/Lançamento';
 
 function Despesa(props){
 
-    console.log(props.query.id)
     return(
         <div>
         <Header user="Adicionando uma despesa"  />

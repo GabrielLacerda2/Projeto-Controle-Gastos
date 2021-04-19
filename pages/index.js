@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import {useEffect, useState} from 'react';
 import {Form, Button, Loader} from 'semantic-ui-react';
+import Head from 'next/head';
 
 
 function Index(){
@@ -23,8 +24,6 @@ function Index(){
     },[errors]);
 
     const handleChange = (e) => {
-        console.log(e.target.value);
-        
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -34,7 +33,6 @@ function Index(){
     const handleSubmit = (e) =>{
         e.preventDefault();
         let errs = Validate();
-        console.log(errs)
         setErrors(errs);
         setIsSubmit(true);
         setMessage('')
@@ -52,9 +50,6 @@ function Index(){
     }
 
     const login = async () => {
-        console.log(form)
-        
-
         const res = await fetch("/api/usuarios",{
             method: "PUT",
             headers: {
@@ -67,10 +62,7 @@ function Index(){
         const {data} = await res.json();
         console.log(data)
         if(data){
-        console.log(data._id);
-        console.log("aaaaaaaaaaaaaaa")
         if(data.email === form.email && data.senha === form.senha){
-            console.log("Usuario encontrado");
             router.push({
                 pathname: '/[id]/home',
                 query: { id: data._id},
@@ -78,15 +70,16 @@ function Index(){
                              
         }
     }else{
-        console.log("Usuario feio")
         setMessage("Usuário não encontrado, tente novamente")
-    
     }
     
     }
   
     return(
         <div className="wrapper-index">
+            <Head>
+                <title>Controle de Gastos</title>
+            </Head>
         <div className="left">
                 
                 <h1 className="title-controle">Controle seus gastos!</h1>

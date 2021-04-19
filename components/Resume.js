@@ -7,6 +7,14 @@ import Link from "next/link";
 
 
 function Resume(props){
+    let saldo = parseFloat(props.saldo).toFixed(2);
+    saldo = saldo.toString().replace(".",",");
+    let receita = parseFloat(props.receita).toFixed(2);
+    receita = receita.toString().replace(".",",");
+    let despesa = parseFloat(props.despesa).toFixed(2);
+    despesa = despesa.toString().replace(".",",");
+
+
     const receitaStyle = {
         color: 'green'
     }
@@ -14,8 +22,6 @@ function Resume(props){
     const despesaStyle = {
         color: '#d73232'
     }
-
-    console.log(props.usuario._id)
 
         return(
         <div className="info-resumed">
@@ -25,7 +31,7 @@ function Resume(props){
                      
                     <div className="valor">
                         <p>R$</p>
-                        <p className="saldo">{parseFloat(props.saldo).toFixed(2)}</p>
+                        <p className="saldo">{saldo}</p>
                     </div>
                     
 
@@ -48,7 +54,7 @@ function Resume(props){
 
                     <div className="valor">
                         <p style={receitaStyle}>R$</p>
-                        <p className="saldo" style={receitaStyle}>{parseFloat(props.receita).toFixed(2)}</p>
+                        <p className="saldo" style={receitaStyle}>{receita}</p>
                     </div>
                 </div>
                 
@@ -71,7 +77,7 @@ function Resume(props){
                     </div>
                     <div className="valor">
                         <p style={despesaStyle}>R$</p>
-                        <p className="saldo" style={despesaStyle}>{parseFloat(props.despesa).toFixed(2)}</p>
+                        <p className="saldo" style={despesaStyle}>{despesa}</p>
                     </div>
                 </div>    
                

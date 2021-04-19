@@ -18,8 +18,7 @@ import {
     if(req){
         host = req.headers.host;
     }
-    console.log(query.type)
-        const res = await fetch(`https://${host}/api/${query.id}`,{
+        const res = await fetch(`http://${host}/api/${query.id}`,{
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -64,7 +63,6 @@ function extratoReceita(props){
     const handleSelect = (e) => {
         setCategoria(e.target.innerText)
         setCategoria1(e.target.value)
-        console.log(categoria)
         selected();
     }
 
@@ -74,14 +72,11 @@ function extratoReceita(props){
         
         props.user[0].forEach((item)=>{
             if(item.tipo == props.type){
-                console.log("entrou")
                 initialValue.push([item]);
             }
         })
         setLista(initialValue);  
 }   
-    console.log(lista)
-
     let headerTitle = '';
     props.type == "receita"? headerTitle= 'Extrato das Receitas' : headerTitle = 'Extrato das Despesas'
     return(
